@@ -47,17 +47,14 @@ def download_marketstack_data(stock):
             'limit': 1000
         }
 
-        print(f"https://api.marketstack.com/v1/intraday/{date_string}")
         api_result = requests.get(f'https://api.marketstack.com/v1/intraday/{date_string}', params)
-
-        print
 
         api_response = api_result.json()
 
         if 'error' in api_response.keys():
             print(f"API error: {api_response['error']['message']}")
         else:
-            print(api_response)
+            #print(api_response)
             df = pd.DataFrame(api_response['data'])
             df.to_csv(f'input_data/{stock}/{date_string}.csv')
 
